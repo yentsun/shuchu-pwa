@@ -1,27 +1,17 @@
 import React from 'react';
 import Card from './Card/Card';
-import './App.css';
+import photo1 from './Card/31_19 06 21.jpg';
+import photo2 from './Card/IMG_9013.jpg';
+import photo3 from './Card/DSC_3142.JPG';
 
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Card image={{ x: -15, y: -30, width: 260, xlinkHref: photo1 }} />
+        <Card image={{ x: -20, y: -20, width: 260, xlinkHref: photo2 }} />
+        <Card image={{ x: -15, y: -30, width: 260, xlinkHref: photo3 }} />
       </header>
     </div>
   );

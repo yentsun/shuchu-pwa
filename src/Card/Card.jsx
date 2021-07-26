@@ -1,11 +1,18 @@
 import React from 'react';
 import './card.css';
+import photo from './31_19 06 21.jpg';
 
 
-export default function Card() {
-    return (<div className="card">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="pink" d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"/>
-        </svg>
-    </div>);
+export default function Card({ image }) {
+    return (<svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1"
+                 width="228" height="332">
+
+        <defs>
+            <clipPath id="base">
+                <path d="M10,0 h208 a10,10 0 0 1 10,10 v312 a10,10 0 0 1 -10,10 h-208 a10,10 0 0 1 -10,-10 v-312 a10,10 0 0 1 10,-10 z" />
+            </clipPath>
+        </defs>
+
+        <image {...image } clipPath="url(#base)" />
+    </svg>);
 }
