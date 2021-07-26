@@ -1,6 +1,5 @@
 import React from 'react';
 import './card.css';
-import photo from './31_19 06 21.jpg';
 
 
 export default function Card({ image }) {
