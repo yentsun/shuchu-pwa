@@ -2,16 +2,29 @@ import React from 'react';
 import './card.css';
 
 
-export default function Card({ image }) {
+const WIDTH = 228;
+const HEIGHT = 332;
+
+export default function Card({ image, color }) {
     return (<svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1"
-                 width="228" height="332">
+                 width={ WIDTH } height={ HEIGHT }>
 
         <defs>
             <clipPath id="base">
-                <path d="M10,0 h208 a10,10 0 0 1 10,10 v312 a10,10 0 0 1 -10,10 h-208 a10,10 0 0 1 -10,-10 v-312 a10,10 0 0 1 10,-10 z" />
+                <rect width={ WIDTH } height={ HEIGHT } rx="10" />
             </clipPath>
+
+            <radialGradient id={ color } cx="50%" cy="50%" r="50%" >
+                <stop offset="30%" style={{ 'stop-color': color,'stop-opacity':1.00}} />
+                <stop offset="100%" style={{ 'stop-color': color, 'stop-opacity':0.00 }} />
+            </radialGradient>
         </defs>
 
-        <image {...image } clipPath="url(#base)" />
+        <g clipPath="url(#base)">
+            <image {...image }  />
+            <rect x={ 0 } y={ HEIGHT - HEIGHT / 3 } width={ WIDTH } height={ HEIGHT / 3 } fill={ `url(#${color})` } />
+        </g>
+
+
     </svg>);
 }

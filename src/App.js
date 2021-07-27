@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Card image={{ x: -15, y: -30, width: 260, xlinkHref: photo1 }} />
-        <Card image={{ x: -20, y: -20, width: 260, xlinkHref: photo2 }} />
-        <Card image={{ x: -15, y: -30, width: 260, xlinkHref: photo3 }} />
+        <Card color="#a793acff" image={{ x: -15, y: -30, width: 260, xlinkHref: photo1 }} />
+        <Card color="black" image={{ x: -20, y: -20, width: 260, xlinkHref: photo2 }} />
+        <Card color="grey" image={{ x: -15, y: -30, width: 260, xlinkHref: photo3 }} />
       </header>
     </div>
   );
