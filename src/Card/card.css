@@ -1,3 +1,15 @@
 svg {
     margin: 2em;
 }
+
+/* SVG styles */
+.title {
+    font: 30px serif;
+    fill: white;
+}
+
+.flavor {
+    font: italic 15px serif;
+    color: white;
+    line-height: 1em;
+}
