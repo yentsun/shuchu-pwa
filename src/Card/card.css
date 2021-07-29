@@ -2,14 +2,11 @@ svg {
     margin: 2em;
 }
 
-/* SVG styles */
-.title {
-    font: 30px serif;
-    fill: white;
+.card {
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 228px;
+    height: 332px;
 }
 
-.flavor {
-    font: italic 15px serif;
-    color: white;
-    line-height: 1em;
-}
+
