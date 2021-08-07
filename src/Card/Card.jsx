@@ -22,7 +22,7 @@ export default function Card({ image, color, title, flavor }) {
 
         <defs>
             <clipPath id="base">
-                <rect width={ WIDTH } height={ HEIGHT } rx="10" />
+                <rect width={ WIDTH } height={ HEIGHT } rx="0" />
             </clipPath>
 
             <radialGradient id={ color } cx="50%" cy="50%" r="50%" >

@@ -1,0 +1,4 @@
+#side-panel {
+    grid-area: side-panel;
+    background-color: cadetblue;
+}

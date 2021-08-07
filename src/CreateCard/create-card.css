@@ -1,0 +1,39 @@
+#create-card {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 10% auto;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "header header"
+                         "preview controls";
+}
+
+#create-card h1 {
+    grid-area: header;
+    background-color: bisque;
+}
+
+#preview {
+    grid-area: preview;
+    justify-self: center;
+    align-self: center;
+}
+
+#preview .card {
+    width: 350px;
+    height: 500px;
+}
+
+#controls {
+    grid-area: controls;
+    background-color: aquamarine;
+}
+
+#controls input {
+    margin: 1em;
+    width: 60%;
+    display: block;
+}
+
+#controls button {
+    margin: 1em;
+}

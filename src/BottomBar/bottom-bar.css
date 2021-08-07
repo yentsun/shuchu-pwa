@@ -1,0 +1,8 @@
+#bottom-bar {
+    grid-area: bottom-bar;
+    padding: .2em;
+    background-color: dimgrey;
+    color: darkgray;
+    font-size: 80%;
+    font-family: monospace, sans-serif;
+}

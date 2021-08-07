@@ -1,0 +1,15 @@
+#top-bar {
+    grid-area: top-bar;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 3px;
+    align-items: center;
+    font-size: 80%;
+}
+
+#top-bar #balance {
+    background: url('./v-coin.svg') center left / 16px no-repeat;
+    padding-left: 21px;
+}

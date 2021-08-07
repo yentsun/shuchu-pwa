@@ -1,0 +1,10 @@
+#playground {
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+        "side-panel top-bar"
+        "side-panel main"
+        "bottom-bar bottom-bar";
+    grid-template-columns: 20% auto;
+    grid-template-rows: 35px auto 30px;
+}
