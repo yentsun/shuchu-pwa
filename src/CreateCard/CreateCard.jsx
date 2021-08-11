@@ -1,9 +1,11 @@
 import loadImage from 'blueimp-load-image';
-import React, {useContext, useEffect, useState} from 'react';
+import { customAlphabet } from 'nanoid';
+import { nolookalikesSafe } from 'nanoid-dictionary';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { keys, words as w } from '../dictionary';
 import { BaseContext } from '../Base/reducer';
-import useDB from '../hooks/useDB';
+import useDBCall from '../hooks/useDB';
 import Card from '../Card/Card';
 import './create-card.css';
 import '../Card/card.css';
@@ -13,6 +15,7 @@ export default function CreateCard() {
 
     const { state: { self }} = useContext(BaseContext);
     const [ cardProps, setCardProps ] = useState({
+        id: null,
         color: 'grey',
         title: 'title',
         flavor: 'some flavor text'
@@ -21,9 +24,8 @@ export default function CreateCard() {
     const [ file, setFile ] = useState(null);
     const [ applyClicked, setApplyClicked ] = useState(false);
     const [ renderedCard, setRenderedCard ] = useState(null);
-    const [ createCard ] = useDB({
-        db: keys.sourceDB, cmd: keys.insertOne, collection: keys.cardsCollection,
-        query: { ...cardProps, image, authorId: self.id }});
+    const [ createCard ] = useDBCall({
+        db: keys.sourceDB, cmd: keys.insertOne, collection: keys.cardsCollection });
 
     // normalize image to blob
     useEffect(() => {
@@ -68,11 +70,11 @@ export default function CreateCard() {
                    name="files[]" id="file"
                    multiple />
 
-            <input onChange={ (e) => setImage({...image, x: e.target.value }) }
+            <input onChange={ (e) => setImage({...image, x: Number(e.target.value) }) }
                    type="text" defaultValue={ image.x } />
-            <input onChange={ (e) => setImage({...image, y: e.target.value}) }
+            <input onChange={ (e) => setImage({...image, y: Number(e.target.value) }) }
                    type="text" defaultValue={ image.y } />
-            <input onChange={ (e) => setImage({...image, width: e.target.value}) }
+            <input onChange={ (e) => setImage({...image, width: Number(e.target.value) }) }
                    type="text" defaultValue={ image.width } />
             <input onChange={ (e) => setCardProps({...cardProps, color: e.target.value}) }
                    type="text" defaultValue={ cardProps.color } />
@@ -82,7 +84,13 @@ export default function CreateCard() {
                    type="text" defaultValue={ cardProps.flavor } />
 
             <button onClick={ () => setApplyClicked(true) } >{ w.apply }</button>
-            <button onClick={ () => createCard() } >{ w.create }</button>
+            <button onClick={ () => createCard({
+                ...cardProps,
+                image,
+                authorId: self.id,
+                id: `CRD-${customAlphabet(nolookalikesSafe, 10)()}` }) } >
+                { w.create }
+            </button>
         </div>
 
     </div>);

@@ -4,7 +4,8 @@ const keys = {
     sourceDB: 'source',
     playerCollection: 'players',
     cardsCollection: 'cards',
-    insertOne: 'insertOne'
+    insertOne: 'insertOne',
+    find: 'find'
 };
 
 export default keys;

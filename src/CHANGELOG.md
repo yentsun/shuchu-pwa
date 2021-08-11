@@ -1,3 +1,4 @@
 [0.1.0]
 -------
-- [ ] Make images part of SVGs
+- [x] Make images part of SVGs
+- [ ] Add card deletion

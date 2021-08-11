@@ -9,7 +9,8 @@ const words = {
     received: 'received',
     create: 'create',
     card: 'card',
-    apply: 'apply'
+    apply: 'apply',
+    inventory: 'inventory'
 }
 
 export default words;

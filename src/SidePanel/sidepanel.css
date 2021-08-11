@@ -1,4 +1,15 @@
 #side-panel {
     grid-area: side-panel;
     background-color: cadetblue;
+    align-items: center;
+    justify-items: center;
+    display: grid;
+}
+
+#side-panel a {
+    color: aliceblue;
+}
+
+#side-panel li {
+    color: aliceblue;
 }

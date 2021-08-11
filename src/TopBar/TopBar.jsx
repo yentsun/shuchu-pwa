@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import './topbar.css';
 import { actionTypes, keys } from '../dictionary';
 import { viki } from '../index';
 import { BaseContext } from '../Base/reducer';
 import useDB from '../hooks/useDB';
 import useLogout from '../hooks/useLogout';
+import './topbar.css';
 
 
 const formatter = new Intl.NumberFormat({

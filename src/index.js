@@ -5,7 +5,7 @@ import Base from './Base/Base';
 import reportWebVitals from './reportWebVitals';
 
 
-const viki = new Realm.App({ id: 'viki-xcjnu' });
+const viki = new Realm.App({ id: process.env.REACT_APP_REALM_ID });
 export { viki };
 
 ReactDOM.render(
