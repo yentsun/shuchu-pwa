@@ -1,4 +1,9 @@
 #main {
     grid-area: main;
     background-color: burlywood;
+    padding: 1em;
+}
+
+#main h1 {
+    margin-bottom: 1em;
 }

@@ -9,6 +9,8 @@ import './inventory.css';
 
 export default function Inventory() {
 
+    // TODO implement this: http://jsfiddle.net/ZqpGL/263/
+
     const { state: { self }} = useContext(BaseContext);
     const [ renderedCards, setRenderedCards ] = useState([]);
     const [ getCards, cards ] = useDBCall({ db: keys.projectionDB, cmd: keys.find, collection: keys.cardsCollection });

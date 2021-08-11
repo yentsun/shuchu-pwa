@@ -3,9 +3,19 @@
     grid-template-columns: repeat(auto-fit,120px);
     grid-auto-rows: 170px;
     grid-gap: 20px;
+    position: relative;
 }
 
 #inventory .card {
     width: 120px;
     height: 170px;
+    transition: transform .3s;
+    filter: blur(.03em);
+    /*transform-origin: 100% 0;*/
+}
+
+#inventory .card:hover {
+    filter: blur(0);
+    transform: scale(3) rotate(1deg);
+    z-index: 100;
 }
