@@ -7,7 +7,7 @@ import { keys, words as w } from '../dictionary';
 import { BaseContext } from '../Base/reducer';
 import useDBCall from '../hooks/useDB';
 import Card from '../Card/Card';
-import './create-card.css';
+import './manage-card.css';
 import '../Card/card.css';
 
 
@@ -33,7 +33,6 @@ export default function CreateCard() {
         if (! file) return;
 
         loadImage(file, (canvas) => {
-            // canvas.toBlob(setNormalizedImageBlob, 'image/jpeg');
             setImage(image => ({...image, xlinkHref: canvas.toDataURL() }))
         }, {
             maxWidth: 820,
@@ -54,6 +53,7 @@ export default function CreateCard() {
 
 
     return (<div id="create-card">
+
         <h1>{ w.create } { w.card }</h1>
 
         <div id="preview">
