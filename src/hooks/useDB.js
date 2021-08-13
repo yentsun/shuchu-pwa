@@ -3,9 +3,9 @@ import { viki } from '../index';
 import { keys } from '../dictionary';
 
 
-export default function useDB({ db=keys.projectionDB, collection, cmd='findOne' }) {
+export default function useDB({ service=keys.atlasService, db=keys.projectionDB, collection, cmd=keys.findOne }) {
 
-    const mongodb = viki.currentUser.mongoClient(keys.atlasService);
+    const client = viki.currentUser.mongoClient(service);
     const [ response, setResponse ] = useState(null);
     const [ inProgress, setInProgress ] = useState(false);
     const [ query, setQuery ] = useState(null);
@@ -16,8 +16,8 @@ export default function useDB({ db=keys.projectionDB, collection, cmd='findOne' 
 
             try {
                 setInProgress(true);
-                console.debug('performing call:', db, collection, cmd);
-                const projection = await mongodb.db(db).collection(collection)[cmd](query);
+                console.debug('performing call:', service, db, collection, cmd);
+                const projection = await client.db(db).collection(collection)[cmd](query);
                 setResponse(projection);
 
             } catch (error) {
@@ -32,7 +32,7 @@ export default function useDB({ db=keys.projectionDB, collection, cmd='findOne' 
         if (query && ! inProgress)
             performCall();
 
-    }, [ collection, query, inProgress, mongodb, cmd, db ]);
+    }, [ collection, query, inProgress, client, cmd, db, service ]);
 
     return [ setQuery, response ];
 }

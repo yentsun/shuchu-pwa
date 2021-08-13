@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { routes } from '../dictionary';
-import CreateCard from '../CreateCard/CreateCard';
+import CreateCard from '../ManageCard/CreateCard';
 import Inventory from '../Inventory/Inventory';
 import './main.css';
 

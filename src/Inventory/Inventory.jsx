@@ -21,7 +21,7 @@ export default function Inventory() {
         if (! self) return;
 
         console.debug('fetching player cards');
-        getCards({ authorId: self.id });
+        getCards({ ownerId: self.id });
 
     }, [ self, getCards ])
 

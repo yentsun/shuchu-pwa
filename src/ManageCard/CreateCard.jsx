@@ -24,8 +24,10 @@ export default function CreateCard() {
     const [ file, setFile ] = useState(null);
     const [ applyClicked, setApplyClicked ] = useState(false);
     const [ renderedCard, setRenderedCard ] = useState(null);
-    const [ createCard ] = useDBCall({
-        db: keys.sourceDB, cmd: keys.insertOne, collection: keys.cardsCollection });
+    const [ newEvent ] = useDBCall({
+        db: keys.sourceDB,
+        cmd: keys.insertOne,
+        collection: keys.eventsCollection });
 
     // normalize image to blob
     useEffect(() => {
@@ -84,11 +86,14 @@ export default function CreateCard() {
                    type="text" defaultValue={ cardProps.flavor } />
 
             <button onClick={ () => setApplyClicked(true) } >{ w.apply }</button>
-            <button onClick={ () => createCard({
-                ...cardProps,
-                image,
-                authorId: self.id,
-                id: `CRD-${customAlphabet(nolookalikesSafe, 10)()}` }) } >
+            <button onClick={ () => newEvent({
+                type: keys.cardCreated,
+                payload: {
+                    ...cardProps,
+                    image,
+                    authorId: self.id,
+                    id: `CRD-${customAlphabet(nolookalikesSafe, 10)()}`
+                }})} >
                 { w.create }
             </button>
         </div>
