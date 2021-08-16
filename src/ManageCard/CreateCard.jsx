@@ -29,10 +29,14 @@ export default function CreateCard() {
         cmd: keys.insertOne,
         collection: keys.eventsCollection });
 
-    // normalize image to blob
+    // normalize image
     useEffect(() => {
 
         if (! file) return;
+
+        if (file.type === 'image/svg+xml') {
+            setCardProps(props => ({...props, flatColor: true }))
+        }
 
         loadImage(file, (canvas) => {
             setImage(image => ({...image, xlinkHref: canvas.toDataURL() }))
