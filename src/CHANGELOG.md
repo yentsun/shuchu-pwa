@@ -1,4 +1,6 @@
 [0.1.0]
 -------
-- [x] Make images part of SVGs
 - [ ] Add card deletion
+- [ ] Implement actual PWA behavior
+- [ ] Implement game session
+- [x] Make images part of SVGs

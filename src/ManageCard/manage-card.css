@@ -29,11 +29,18 @@
 }
 
 #controls input {
-    margin: 1em;
-    width: 60%;
+    margin: 0;
     display: block;
 }
 
 #controls button {
     margin: 1em;
+}
+
+#controls label {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 2fr 5fr;
+    align-items: center;
+    justify-items: right;
 }

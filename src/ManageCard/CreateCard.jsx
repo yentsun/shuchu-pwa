@@ -18,6 +18,7 @@ export default function CreateCard() {
         id: null,
         color: 'grey',
         title: 'title',
+        flatColor: false,
         flavor: 'some flavor text'
     });
     const [ image, setImage ] = useState( { x: -15, y: -30, width: 260, xlinkHref: null });
@@ -71,25 +72,57 @@ export default function CreateCard() {
 
         <div id="controls">
 
-            <input type="file"
-                   onChange={ (e) => setFile(Array.from(e.target.files)[0]) }
-                   name="files[]" id="file"
-                   multiple />
+            <label htmlFor="file">
+                file:
+                <input type="file"
+                       onChange={ (e) => setFile(Array.from(e.target.files)[0]) }
+                       name="files[]" id="file" />
+            </label>
 
-            <input onChange={ (e) => setImage({...image, x: Number(e.target.value) }) }
-                   type="text" defaultValue={ image.x } />
-            <input onChange={ (e) => setImage({...image, y: Number(e.target.value) }) }
-                   type="text" defaultValue={ image.y } />
-            <input onChange={ (e) => setImage({...image, width: Number(e.target.value) }) }
-                   type="text" defaultValue={ image.width } />
-            <input onChange={ (e) => setCardProps({...cardProps, color: e.target.value}) }
-                   type="text" defaultValue={ cardProps.color } />
-            <input onChange={ (e) => setCardProps({...cardProps, title: e.target.value}) }
-                   type="text" defaultValue={ cardProps.title } />
-            <input onChange={ (e) => setCardProps({...cardProps, flavor: e.target.value}) }
-                   type="text" defaultValue={ cardProps.flavor } />
+            <label htmlFor="xOffset">
+                x offset:
+                <input onChange={ (e) => setImage({...image, x: Number(e.target.value) }) }
+                       type="text" defaultValue={ image.x } id="xOffset" />
+            </label>
+
+            <label htmlFor="yOffset">
+                y offset:
+                <input onChange={ (e) => setImage({...image, y: Number(e.target.value) }) }
+                       type="text" id="yOffset" defaultValue={ image.y } />
+            </label>
+
+            <label htmlFor="width">
+                width:
+                <input onChange={ (e) => setImage({...image, width: Number(e.target.value) }) }
+                       type="text" id="width" defaultValue={ image.width } />
+            </label>
+
+            <label htmlFor="color">
+                color:
+                <input onChange={ (e) => setCardProps({...cardProps, color: e.target.value}) }
+                       type="text" id="color" defaultValue={ cardProps.color } />
+            </label>
+
+            <label htmlFor="title">
+                title:
+                <input onChange={ (e) => setCardProps({...cardProps, title: e.target.value}) }
+                       type="text" id="title" defaultValue={ cardProps.title } />
+            </label>
+
+            <label htmlFor="flavor">
+                flavor text:
+                <input onChange={ (e) => setCardProps({...cardProps, flavor: e.target.value}) }
+                       type="text" id="flavor" defaultValue={ cardProps.flavor } />
+            </label>
+
+            <label htmlFor="flatColor">
+                flat color:
+                <input id="flatColor" onChange={ (e) => setCardProps({...cardProps, flatColor: e.target.checked}) }
+                       type="checkbox" defaultChecked={ cardProps.flatColor } />
+            </label>
 
             <button onClick={ () => setApplyClicked(true) } >{ w.apply }</button>
+
             <button onClick={ () => newEvent({
                 type: keys.cardCreated,
                 payload: {
