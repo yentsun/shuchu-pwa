@@ -15,6 +15,7 @@
 
 #inventory .card:hover {
     filter: blur(0);
+    transition-delay: .3s;
     transform: scale(2);
     z-index: 100;
 }

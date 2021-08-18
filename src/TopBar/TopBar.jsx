@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { actionTypes, keys } from '../dictionary';
 import { viki } from '../index';
 import { BaseContext } from '../Base/reducer';
-import useDB from '../hooks/useDB';
+import useRemoteDB from '../hooks/useRemoteDB';
 import useLogout from '../hooks/useLogout';
 import './topbar.css';
 
@@ -17,7 +17,7 @@ export default function TopBar() {
     const logOut = useLogout();
 
     // if we have no `self` object, get our projection from DB
-    const [ getSelfProjection, selfProjection ] = useDB({
+    const [ getSelfProjection, selfProjection ] = useRemoteDB({
         collection: keys.playerCollection,
         query: { id: viki.currentUser.customData.id }});
 

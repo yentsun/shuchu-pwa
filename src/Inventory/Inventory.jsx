@@ -1,50 +1,36 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import ReactDOMServer from 'react-dom/server';
-import useDBCall from '../hooks/useDB';
-import { keys, words as w } from '../dictionary';
-import { BaseContext } from '../Base/reducer';
+import { words as w } from '../dictionary';
 import Card from '../Card/Card';
+import Modal from '../ModalWrapper';
 import './inventory.css';
+import useGetCards from './useGetCards';
 
 
 export default function Inventory() {
 
     // TODO implement this: http://jsfiddle.net/ZqpGL/263/
 
-    const { state: { self }} = useContext(BaseContext);
-    const [ renderedCards, setRenderedCards ] = useState([]);
-    const [ getCards, cards ] = useDBCall({ db: keys.projectionDB, cmd: keys.find, collection: keys.cardsCollection });
+    const [ selectedCardId, setSelectedCardId ] = useState(null);
+    const [ cards ] = useGetCards();
 
-    // fetch cards data
-    useEffect(() => {
-
-        if (! self) return;
-
-        console.debug('fetching player cards');
-        getCards({ ownerId: self.id });
-
-    }, [ self, getCards ])
-
-    // render cards
-    useEffect(() => {
-
-        if (! cards) return;
-
-        console.debug('rendering cards:', cards.length);
-        const rendered = cards.map(({ image, ...cardProps }) => ReactDOMServer.renderToStaticMarkup(<Card {...cardProps } image={ image } />));
-        setRenderedCards(rendered);
-
-    }, [ cards ])
+    console.debug({ selectedCardId });
 
     return (<div id="inventory">
+
+        { selectedCardId &&
+        <Modal>
+
+        </Modal> }
 
         <h1>{ w.inventory }</h1>
 
         <div id="cards">
 
-            { renderedCards.map((renderedCard, index) =>
-                <div key={ index }
-                     className="card" style={{ backgroundImage: `url(data:image/svg+xml;base64,${btoa(renderedCard)})` }} />) }
+            { cards && cards.map(({ image, id, ...cardProps }) =>
+                <div key={ id } id={ id } className="card" onClick={ () => setSelectedCardId(id) }
+                     style={{ backgroundImage: `url(data:image/svg+xml;base64,${btoa(ReactDOMServer.renderToStaticMarkup(
+                         <Card {...cardProps } image={ image } />))})` }} />) }
 
         </div>
 

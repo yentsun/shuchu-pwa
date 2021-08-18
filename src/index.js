@@ -1,12 +1,30 @@
+import Dexie from 'dexie';
 import * as Realm from 'realm-web';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Base from './Base/Base';
 import reportWebVitals from './reportWebVitals';
+import { keys } from './dictionary';
 
 
+// initialize Realm app
 const viki = new Realm.App({ id: process.env.REACT_APP_REALM_ID });
-export { viki };
+
+// local DB
+const aziza = new Dexie('aziza');
+aziza.version(1).stores({ cards: 'id' });
+aziza.cards.hook('creating', async (primKey, newCard) => {
+
+    if (newCard._id) return;
+
+    const atlas = viki.currentUser.mongoClient(keys.atlasService);
+    const result = await atlas.db(keys.sourceDB).collection(keys.eventsCollection).insertOne({
+        type: keys.cardCreated,
+        payload: newCard });
+    console.debug('new card created event sent:', result);
+});
+
+export { viki, aziza };
 
 ReactDOM.render(
     <React.StrictMode>

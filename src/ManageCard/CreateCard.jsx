@@ -3,10 +3,10 @@ import { customAlphabet } from 'nanoid';
 import { nolookalikesSafe } from 'nanoid-dictionary';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { keys, words as w } from '../dictionary';
+import { words as w } from '../dictionary';
 import { BaseContext } from '../Base/reducer';
-import useDBCall from '../hooks/useDB';
 import Card from '../Card/Card';
+import { aziza } from '../index';
 import './manage-card.css';
 import '../Card/card.css';
 
@@ -25,10 +25,6 @@ export default function CreateCard() {
     const [ file, setFile ] = useState(null);
     const [ applyClicked, setApplyClicked ] = useState(false);
     const [ renderedCard, setRenderedCard ] = useState(null);
-    const [ newEvent ] = useDBCall({
-        db: keys.sourceDB,
-        cmd: keys.insertOne,
-        collection: keys.eventsCollection });
 
     // normalize image
     useEffect(() => {
@@ -123,14 +119,13 @@ export default function CreateCard() {
 
             <button onClick={ () => setApplyClicked(true) } >{ w.apply }</button>
 
-            <button onClick={ () => newEvent({
-                type: keys.cardCreated,
-                payload: {
-                    ...cardProps,
-                    image,
-                    authorId: self.id,
-                    id: `CRD-${customAlphabet(nolookalikesSafe, 10)()}`
-                }})} >
+            <button onClick={ () => aziza.cards.add({
+                ...cardProps,
+                image,
+                authorId: self.id,
+                ownerId: self.id,
+                id: `CRD-${customAlphabet(nolookalikesSafe, 10)()}`
+            })} >
                 { w.create }
             </button>
         </div>

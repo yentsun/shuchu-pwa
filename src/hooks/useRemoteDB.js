@@ -3,7 +3,7 @@ import { viki } from '../index';
 import { keys } from '../dictionary';
 
 
-export default function useDB({ service=keys.atlasService, db=keys.projectionDB, collection, cmd=keys.findOne }) {
+export default function useRemoteDB({ service=keys.atlasService, db=keys.projectionDB, collection, cmd=keys.findOne }) {
 
     const client = viki.currentUser.mongoClient(service);
     const [ response, setResponse ] = useState(null);
