@@ -2,24 +2,28 @@ import React, { useState } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { words as w } from '../dictionary';
 import Card from '../Card/Card';
-import Modal from '../ModalWrapper';
-import './inventory.css';
+import Modal from '../Modal';
 import useGetCards from './useGetCards';
+import './inventory.css';
 
 
 export default function Inventory() {
 
-    // TODO implement this: http://jsfiddle.net/ZqpGL/263/
+    // TODO implement this for centered zoom: http://jsfiddle.net/ZqpGL/263/
 
     const [ selectedCardId, setSelectedCardId ] = useState(null);
-    const [ cards ] = useGetCards();
-
-    console.debug({ selectedCardId });
+    const [ cardMap ] = useGetCards({ returnMap: true });
 
     return (<div id="inventory">
 
         { selectedCardId &&
-        <Modal>
+        <Modal setMounted={ setSelectedCardId }>
+
+            <div id={ selectedCardId } className="card-detail" style={{
+                backgroundImage: `url(data:image/svg+xml;base64,${btoa(ReactDOMServer.renderToStaticMarkup(
+                    <Card {...cardMap[selectedCardId] } />))})` }}>
+
+            </div>
 
         </Modal> }
 
@@ -27,7 +31,7 @@ export default function Inventory() {
 
         <div id="cards">
 
-            { cards && cards.map(({ image, id, ...cardProps }) =>
+            { cardMap && Object.values(cardMap).map(({ image, id, ...cardProps }) =>
                 <div key={ id } id={ id } className="card" onClick={ () => setSelectedCardId(id) }
                      style={{ backgroundImage: `url(data:image/svg+xml;base64,${btoa(ReactDOMServer.renderToStaticMarkup(
                          <Card {...cardProps } image={ image } />))})` }} />) }

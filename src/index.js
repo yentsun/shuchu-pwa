@@ -13,6 +13,8 @@ const viki = new Realm.App({ id: process.env.REACT_APP_REALM_ID });
 // local DB
 const aziza = new Dexie('aziza');
 aziza.version(1).stores({ cards: 'id' });
+
+// TODO move to a separate file
 aziza.cards.hook('creating', async (primKey, newCard) => {
 
     if (newCard._id) return;

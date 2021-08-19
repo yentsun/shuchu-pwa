@@ -4,7 +4,7 @@ import { keys } from '../dictionary';
 import { BaseContext } from '../Base/reducer';
 
 
-export default function useGetCards() {
+export default function useGetCards({ returnMap=false }) {
 
     const [ cards, setCards ] = useState(null);
     const { state: { self }} = useContext(BaseContext);
@@ -25,13 +25,15 @@ export default function useGetCards() {
                 console.debug('done:', lastKey);
             }
 
-            setCards(await aziza.cards.toArray());
+            const result = await aziza.cards.toArray();
+
+            setCards(returnMap ?  result.reduce((acc, curr) => { acc[curr.id] = curr; return acc }, {}) : result);
         }
 
         if (! cards)
             fetchCards();
 
-    }, [ cards, self.id ]);
+    }, [ cards, self.id, returnMap ]);
 
     return [ cards ];
 

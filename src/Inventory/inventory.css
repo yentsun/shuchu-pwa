@@ -11,11 +11,19 @@
     height: 170px;
     transition: transform .3s;
     transform-origin: 100% 30%;
+    cursor: pointer;
 }
 
-#inventory .card:hover {
-    filter: blur(0);
-    transition-delay: .3s;
-    transform: scale(2);
-    z-index: 100;
+/*#inventory .card:hover {*/
+/*    filter: blur(0);*/
+/*    transition-delay: .3s;*/
+/*    transform: scale(2);*/
+/*    z-index: 100;*/
+/*}*/
+
+.card-detail {
+    width: 50%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
