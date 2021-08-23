@@ -5,7 +5,7 @@ import './card.css';
 const WIDTH = 228;
 const HEIGHT = 332;
 
-export default function Card({ image, flatColor=false, color, title, flavor }) {
+export default function Card({ image, flatColor=false, color, title, flavor, clean=false }) {
 
     const titleStyle =  {
         font: `30px serif`,
@@ -40,16 +40,19 @@ export default function Card({ image, flatColor=false, color, title, flavor }) {
 
             <image {...image }  />
 
-            { ! flatColor &&
-            <rect x={ 0 } y={ HEIGHT - HEIGHT / 3 } width="100%" height={ HEIGHT / 3 } fill={ `url(#${color})` } />}
+            { (! clean || flatColor) &&
+            <>
+                { ! flatColor &&
+                <rect x={ 0 } y={ HEIGHT - HEIGHT / 3 } width="100%" height={ HEIGHT / 3 } fill={ `url(#${color})` } />}
 
-            <text textAnchor="middle" x="50%" y={ HEIGHT - HEIGHT / 5.2 } style={ titleStyle } fillOpacity="0.9">{ title }</text>
-            <path strokeWidth={ 0.4 } opacity={ 0.8 } stroke={ flatColor ? 'black' : 'white' } d={ `m 10,280 h 208 z` } />
-            <foreignObject x="30" y="270" width="180" height="50" opacity="0.8">
-                <p xmlns="http://www.w3.org/1999/xhtml" style={ flavorStyle }>
-                    { flavor }
-                </p>
-            </foreignObject>
+                <text textAnchor="middle" x="50%" y={ HEIGHT - HEIGHT / 5.2 } style={ titleStyle } fillOpacity="0.9">{ title }</text>
+                <path strokeWidth={ 0.4 } opacity={ 0.8 } stroke={ flatColor ? 'black' : 'white' } d={ `m 10,280 h 208 z` } />
+                <foreignObject x="30" y="270" width="180" height="50" opacity="0.8">
+                    <p xmlns="http://www.w3.org/1999/xhtml" style={ flavorStyle }>
+                        { flavor }
+                    </p>
+                </foreignObject>
+            </> }
         </g>
 
     </svg>);

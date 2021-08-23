@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import useMount from './hooks/useMount';
 
 
-export default function Modal({ children, setMounted }) {
+export default function Modal({ children, setMounted, ...props }) {
+
+    const [ _ref, isMounted ] = useMount(true);
+
+    useEffect(() => {
+
+        if (! isMounted)
+            setMounted(false)
+
+    }, [ isMounted, setMounted ]);
 
     const Element = (
 
-        <div id="modal" >
+        <div ref={ _ref } id="modal" {...props } >
             { children }
-
-            <button onClick={ () => setMounted(false) } >close</button>
         </div>);
 
     return ReactDOM.createPortal(Element, document.body);

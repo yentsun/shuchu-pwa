@@ -13,17 +13,48 @@ export default function Inventory() {
 
     const [ selectedCardId, setSelectedCardId ] = useState(null);
     const [ cardMap ] = useGetCards({ returnMap: true });
+    const selectedCard = selectedCardId ? cardMap[selectedCardId] : null
 
     return (<div id="inventory">
 
-        { selectedCardId &&
-        <Modal setMounted={ setSelectedCardId }>
+        { selectedCard &&
+        <Modal setMounted={ setSelectedCardId } className="card-detail">
 
-            <div id={ selectedCardId } className="card-detail" style={{
+            <div id={ selectedCardId } className="card-large" style={{
                 backgroundImage: `url(data:image/svg+xml;base64,${btoa(ReactDOMServer.renderToStaticMarkup(
-                    <Card {...cardMap[selectedCardId] } />))})` }}>
-
+                    <Card {...selectedCard } clean={ true } />))})` }}>
             </div>
+
+            <table className="props">
+                <tbody>
+
+                <tr>
+                    <td>ID</td>
+                    <td>{ selectedCard.id }</td>
+                </tr>
+
+                <tr>
+                    <td>title</td>
+                    <td>{ selectedCard.title }</td>
+                </tr>
+
+                <tr>
+                    <td>flavor text</td>
+                    <td>{ selectedCard.flavor }</td>
+                </tr>
+
+                <tr>
+                    <td>color</td>
+                    <td>{ selectedCard.color }</td>
+                </tr>
+
+                <tr>
+                    <td>Owner ID</td>
+                    <td>{ selectedCard.ownerId }</td>
+                </tr>
+
+                </tbody>
+            </table>
 
         </Modal> }
 
@@ -34,7 +65,7 @@ export default function Inventory() {
             { cardMap && Object.values(cardMap).map(({ image, id, ...cardProps }) =>
                 <div key={ id } id={ id } className="card" onClick={ () => setSelectedCardId(id) }
                      style={{ backgroundImage: `url(data:image/svg+xml;base64,${btoa(ReactDOMServer.renderToStaticMarkup(
-                         <Card {...cardProps } image={ image } />))})` }} />) }
+                             <Card {...cardProps } image={ image } />))})` }} />) }
 
         </div>
 
