@@ -5,7 +5,7 @@ import Register from '../Register/Register';
 import PublicRoute from '../PublicRoute';
 import PrivateRoute from '../PrivateRoute';
 import Dashboard from '../Playground/Dashboard';
-import {actionTypes as a, keys, routes as r, words as w} from '../dictionary';
+import { actionTypes as a, keys, routes as r, words as w } from '../dictionary';
 import { BaseContext, initialState, reducer } from './reducer';
 import { viki } from '../index';
 import './base.css';

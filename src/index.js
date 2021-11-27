@@ -4,11 +4,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Base from './Base/Base';
 import reportWebVitals from './reportWebVitals';
+import { register } from  './serviceWorkerRegistration';
 import { keys } from './dictionary';
 
 
 // initialize Realm app
 const viki = new Realm.App({ id: process.env.REACT_APP_REALM_ID });
+const source = viki.currentUser.mongoClient(keys.atlasService).db(keys.sourceDB);
+
 
 // local DB
 const aziza = new Dexie('aziza');
@@ -19,11 +22,8 @@ aziza.cards.hook('creating', async (primKey, newCard) => {
 
     if (newCard._id) return;
 
-    const atlas = viki.currentUser.mongoClient(keys.atlasService);
-    const result = await atlas.db(keys.sourceDB).collection(keys.eventsCollection).insertOne({
-        type: keys.cardCreated,
-        payload: newCard });
-    console.debug('new card created event sent:', result);
+    const result = await source.collection(keys.cardsCollection).insertOne(newCard);
+    console.debug('new card sent:', result);
 });
 
 export { viki, aziza };
@@ -42,3 +42,6 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+// register service worker
+register();
