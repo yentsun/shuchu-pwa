@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, generatePath } from 'react-router-dom';
-import { words as w, routes as r, actionTypes } from '../dictionary';
+import { words as w, paths as r, actionTypes } from '../dictionary';
 import './register.css';
 import { viki } from '../index';
 import { BaseContext } from '../Base/reducer';

@@ -1,6 +1,6 @@
 #side-panel {
     grid-area: side-panel;
-    background-color: cadetblue;
+    background-color: var(--color-bg);
     align-items: center;
     justify-items: center;
     display: grid;

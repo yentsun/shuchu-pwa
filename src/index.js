@@ -1,16 +1,14 @@
 import Dexie from 'dexie';
-import * as Realm from 'realm-web';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Base from './Base/Base';
 import reportWebVitals from './reportWebVitals';
 import { register } from  './serviceWorkerRegistration';
-import { keys } from './dictionary';
 
 
 // initialize Realm app
-const viki = new Realm.App({ id: process.env.REACT_APP_REALM_ID });
-const source = viki.currentUser.mongoClient(keys.atlasService).db(keys.sourceDB);
+// const viki = new Realm.App({ id: process.env.REACT_APP_REALM_ID });
+// const source = viki.currentUser.mongoClient(keys.atlasService).db(keys.sourceDB);
 
 
 // local DB
@@ -18,15 +16,15 @@ const aziza = new Dexie('aziza');
 aziza.version(1).stores({ cards: 'id' });
 
 // TODO move to a separate file
-aziza.cards.hook('creating', async (primKey, newCard) => {
+// aziza.cards.hook('creating', async (primKey, newCard) => {
+//
+//     if (newCard._id) return;
+//
+//     const result = await source.collection(keys.cardsCollection).insertOne(newCard);
+//     console.debug('new card sent:', result);
+// });
 
-    if (newCard._id) return;
-
-    const result = await source.collection(keys.cardsCollection).insertOne(newCard);
-    console.debug('new card sent:', result);
-});
-
-export { viki, aziza };
+export { aziza };
 
 ReactDOM.render(
     <React.StrictMode>

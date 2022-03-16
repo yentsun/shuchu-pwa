@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { actionTypes, keys } from '../dictionary';
-import { viki } from '../index';
 import { BaseContext } from '../Base/reducer';
 import useRemoteDB from '../hooks/useRemoteDB';
 import useLogout from '../hooks/useLogout';

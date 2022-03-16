@@ -1,25 +1,5 @@
 :root {
-    --serif: monospace;
-    --primaryBlue: #2194E0;
-    --primaryBlueDark: #196896;
-}
 
-* {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 20px;
-}
-
-a {
-    color: var(--primaryBlue);
 }
 
 .center {
@@ -33,62 +13,6 @@ form * {
     display: block;
 }
 
-form h1 {
-    padding-left: 1.5em;
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-size: contain;
-}
-
-button {
-    font-size: 90%;
-    padding: .4em .5em;
-    outline: none;
-    cursor: pointer;
-}
-
-button.primary {
-    background-color: #2194E0;
-    border: none;
-    border-bottom: 4px solid #196896;
-    color: white;
-    opacity: 0.8;
-    float: right;
-}
-
-button.primary:hover {
-    opacity: 1;
-}
-
-button.primary:focus {
-    border-bottom: none;
-    border-top: 4px solid white
-}
-
-input {
-    font-family: var(--serif);
-    border: 2px solid gray;
-    font-size: 90%;
-    padding: .5em;
-    margin-bottom: 1em;
-    width: 90%;
-}
-
-label {
-    margin-bottom: .4em;
-}
-
-h1 {
-    text-transform: capitalize;
-}
-
-form {
-    min-width: 300px;
-}
-
-button[type=submit] {
-    margin-top: .7em;
-}
 
 #modal {
     display: block;
@@ -108,6 +32,6 @@ button[type=submit] {
     transform: translate(-50%, -50%);
 
 
-    background: white;
+    background: var(--color-bg-secondary);
     box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
 }

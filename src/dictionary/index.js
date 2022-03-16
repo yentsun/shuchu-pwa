@@ -1,6 +1,6 @@
 import words from './words';
 import phrases from './phrases';
-import routes from './routes';
+import paths from './paths';
 import actionTypes from './actionTypes';
 import keys from './keys';
 
@@ -8,7 +8,7 @@ import keys from './keys';
 export {
     words,
     phrases,
-    routes,
+    paths,
     keys,
     actionTypes
 }

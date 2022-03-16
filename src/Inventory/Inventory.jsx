@@ -48,11 +48,6 @@ export default function Inventory() {
                     <td>{ selectedCard.color }</td>
                 </tr>
 
-                <tr>
-                    <td>Owner ID</td>
-                    <td>{ selectedCard.ownerId }</td>
-                </tr>
-
                 </tbody>
             </table>
 

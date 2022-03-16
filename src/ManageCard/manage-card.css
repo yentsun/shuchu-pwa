@@ -9,7 +9,6 @@
 
 #create-card h1 {
     grid-area: header;
-    background-color: bisque;
 }
 
 #preview {
@@ -25,22 +24,6 @@
 
 #controls {
     grid-area: controls;
-    background-color: aquamarine;
 }
 
-#controls input {
-    margin: 0;
-    display: block;
-}
 
-#controls button {
-    margin: 1em;
-}
-
-#controls label {
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: 2fr 5fr;
-    align-items: center;
-    justify-items: right;
-}

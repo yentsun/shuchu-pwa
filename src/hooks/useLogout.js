@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import { viki } from '../index';
 import { useHistory } from 'react-router-dom';
 import { BaseContext } from '../Base/reducer';
-import { actionTypes, routes as r, words as w } from '../dictionary';
+import { actionTypes, paths as r, words as w } from '../dictionary';
 
 
 export default function useLogout() {
