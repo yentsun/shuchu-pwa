@@ -1,12 +1,12 @@
 // credit: https://stackoverflow.com/a/45323523/216042
 import { useState, useEffect, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function useMount(isInitiallyMounted, isDisabled, routeOnClosure) {
 
     const [ isMounted, setIsMounted ] = useState(isInitiallyMounted);
-    const history = useHistory();
+    const navigate = useNavigate();
     const ref = useRef(null);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ export default function useMount(isInitiallyMounted, isDisabled, routeOnClosure)
                 setIsMounted(false);
 
                 if (routeOnClosure)
-                    history.push(routeOnClosure);
+                    navigate(routeOnClosure);
             }
         };
 
@@ -27,7 +27,7 @@ export default function useMount(isInitiallyMounted, isDisabled, routeOnClosure)
         return () => {
             document.removeEventListener('mousedown', handleClickOutside, true);
         };
-    }, [ isDisabled, history, routeOnClosure ]);
+    }, [ isDisabled, navigate, routeOnClosure ]);
 
     return [ ref, isMounted, setIsMounted, isDisabled ];
 }

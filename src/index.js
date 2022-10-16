@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 import * as Realm from 'realm-web';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import Base from './Base/Base';
 import reportWebVitals from './reportWebVitals';
 import { register } from  './serviceWorkerRegistration';
@@ -9,9 +9,18 @@ import { keys } from './dictionary';
 
 
 // initialize Realm app
-const viki = new Realm.App({ id: process.env.REACT_APP_REALM_ID });
-const source = viki.currentUser.mongoClient(keys.atlasService).db(keys.sourceDB);
+let source;
+let viki;
+const realmAppId = process.env.REACT_APP_REALM_ID;
 
+try {
+    console.debug('⚙ using realm app', realmAppId);
+    viki = new Realm.App({ id: realmAppId });
+    source = viki.currentUser.mongoClient(keys.atlasService).db(keys.sourceDB);
+    console.debug('🌎✅ source initialized');
+} catch (error) {
+    console.error('🌎❌ source initialization failed:', error.message);
+}
 
 // local DB
 const aziza = new Dexie('aziza');
@@ -28,15 +37,13 @@ aziza.cards.hook('creating', async (primKey, newCard) => {
 
 export { viki, aziza };
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
     <React.StrictMode>
-
         <Base />
-
-    </React.StrictMode>,
-
-    document.getElementById('root')
-);
+    </React.StrictMode>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

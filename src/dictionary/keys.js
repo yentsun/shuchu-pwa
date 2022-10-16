@@ -1,5 +1,5 @@
 const keys = {
-    atlasService: 'atlas',
+    atlasService: 'cleo',
     projectionDB: 'projections',
     sourceDB: 'source',
     playerCollection: 'players',

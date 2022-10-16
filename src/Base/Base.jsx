@@ -1,14 +1,21 @@
 import React, { useReducer, useEffect } from 'react';
-import { Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import PublicRoute from '../PublicRoute';
-import PrivateRoute from '../PrivateRoute';
+import RequireAuth from '../RequireAuth';
 import Dashboard from '../Playground/Dashboard';
-import { actionTypes as a, keys, routes as r, words as w } from '../dictionary';
+import {
+    actionTypes as a,
+    keys,
+    routes,
+    routes as r,
+    words as w,
+} from '../dictionary';
 import { BaseContext, initialState, reducer } from './reducer';
 import { viki } from '../index';
 import './base.css';
+import CreateCard from '../ManageCard/CreateCard';
+import Inventory from '../Inventory/Inventory';
 
 
 export default function Base() {
@@ -19,11 +26,15 @@ export default function Base() {
     // load player data if player is logged in
     useEffect(() => {
 
+        console.debug('👤 self:', self);
+
+        if (self) return;
+
         async function loadPlayerdata() {
             const atlas = viki.currentUser.mongoClient(keys.atlasService);
 
-            console.debug(`fetching projection data for ${w.player}`, viki.currentUser.customData.id);
-            const playerDataProjection = await atlas.db(keys.projectionDB).collection(keys.playerCollection).findOne(
+            console.debug(`👤📡 fetching projection data for ${w.player}`, viki.currentUser.customData.id);
+            const playerDataProjection = await atlas.db(keys.sourceDB).collection(keys.playerCollection).findOne(
                 { id: viki.currentUser.customData.id },
                 { projection: { _id: false } });
 
@@ -34,22 +45,26 @@ export default function Base() {
                     ...playerDataProjection }});
         }
 
-        if (viki.currentUser && ! self)
+        if (viki.currentUser)
             loadPlayerdata();
 
     }, [ self ]);
 
     return (
         <BaseContext.Provider value={{ state, dispatch }}>
-            <Router>
-                <Switch>
-                    <PublicRoute path={ r.login } component={ Login }/>
-                    <PublicRoute path={ r.register } component={ Register }/>
+            <BrowserRouter><Routes>
 
-                    <PrivateRoute path={ r.dashboard } component={ Dashboard } />
-                    <Redirect to={ r.dashboard } />
-                </Switch>
-            </Router>
+                {/* Public */}
+                <Route path={ r.login } element={ <Login /> } />
+                <Route path={ r.register } element={ <Register /> } />
+
+                {/* Private */}
+                <Route path={ r.dashboard } element={ <RequireAuth><Dashboard /></RequireAuth> } >
+                    <Route path={ routes.createCard } element={ <CreateCard /> } />
+                    <Route path={ routes.inventory } element={ <Inventory /> } />
+                </Route>
+
+            </Routes></BrowserRouter>
         </BaseContext.Provider>
     );
 }

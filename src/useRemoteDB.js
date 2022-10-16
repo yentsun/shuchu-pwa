@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { viki } from '../index';
-import { keys } from '../dictionary';
+import { viki } from './index';
+import { keys } from './dictionary';
 
 
 export default function useRemoteDB({ service=keys.atlasService, db=keys.projectionDB, collection, cmd=keys.findOne }) {

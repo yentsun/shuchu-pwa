@@ -1,9 +1,9 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import TopBar from '../TopBar/TopBar';
 import './playground.css';
 import SidePanel from '../SidePanel/SidePanel';
 import BottomBar from '../BottomBar/BottomBar';
-import Main from '../Main/Main';
 
 
 export default function Dashboard() {
@@ -14,7 +14,7 @@ export default function Dashboard() {
 
         <SidePanel />
 
-        <Main />
+        <Outlet />
 
         <BottomBar />
 

@@ -1,17 +1,17 @@
-import qs from 'qs';
 import * as Realm from 'realm-web';
 import React, { useState } from 'react';
-import { Link, generatePath, useHistory, useLocation } from 'react-router-dom';
+import { Link, generatePath, useNavigate } from 'react-router-dom';
 import { words as w, routes as r } from '../dictionary';
 import './login.css';
 import { viki } from '../index';
+import useQuery from '../useQuery';
 
 
 export default function Login() {
 
-    const history = useHistory();
-    const location = useLocation();
-    const { redirectTo=r.dashboard } = qs.parse(location.search, { ignoreQueryPrefix: true });
+    const navigate = useNavigate();
+    const query = useQuery();
+    const redirectTo = query.get('redirectTo');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
 
@@ -22,8 +22,8 @@ export default function Login() {
         console.debug('authenticating with email and password:', email, '...');
         const account = await viki.logIn(credentials);
         await account.refreshCustomData();
-        console.debug(account, 'done, redirecting to:', redirectTo);
-        history.push(redirectTo);
+        console.debug(account.id, 'done, redirecting to:', redirectTo);
+        navigate(redirectTo);
     }
 
     return (

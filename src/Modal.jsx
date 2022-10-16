@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import useMount from './hooks/useMount';
+import useMount from './useMount';
 
 
 export default function Modal({ children, setMounted, ...props }) {

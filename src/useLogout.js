@@ -1,13 +1,13 @@
 import { useEffect, useState, useContext } from 'react';
-import { viki } from '../index';
-import { useHistory } from 'react-router-dom';
-import { BaseContext } from '../Base/reducer';
-import { actionTypes, routes as r, words as w } from '../dictionary';
+import { useNavigate } from 'react-router-dom';
+import { viki } from './index';
+import { BaseContext } from './Base/reducer';
+import { actionTypes, routes as r, words as w } from './dictionary';
 
 
 export default function useLogout() {
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const { dispatch } = useContext(BaseContext);
     const [ isWaiting, setIsWaiting ] = useState(true);
 
@@ -19,13 +19,13 @@ export default function useLogout() {
             dispatch({ type: actionTypes.PLAYER_LOGGED_OUT });
 
             console.debug(`redirecting to ${w.login} screen`);
-            history.push(r.login);
+            navigate(r.login);
         }
 
         if (! isWaiting)
             doLogOut();
 
-    }, [ isWaiting, dispatch, history ]);
+    }, [ isWaiting, dispatch, navigate ]);
 
     return setIsWaiting;
 }
